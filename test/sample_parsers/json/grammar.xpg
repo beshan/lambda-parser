@@ -1,0 +1,11 @@
+json : object
+object : ('{' prop rest(',' prop)* '}') / ('{' '}')
+prop : key(STRING) ':' value
+value : STRING / BOOLEAN / NULL / NUMBER / object / array
+array : ('[' value rest(',' value)* ']') / ('[' ']')
+STRING = r'"((\\")|[^"])*"'
+NUMBER = r'[+-]?\d+(\.\d+)?'
+BOOLEAN = r'(true)|(false)'
+NULL = 'null'
+
+SCRIPT = './parser_ext'

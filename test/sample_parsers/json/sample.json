@@ -1,0 +1,28 @@
+{
+  "parent" : { },
+  "parents" : [ ],
+  "menu": {
+    "id": "file",
+    "value": "File",
+    "hasItem" : true,
+    "items": 3,
+    "order": null,
+    "popup": {
+      "menuitem": [
+        {
+          "value": "New",
+          "onclick": "CreateNewDoc()",
+          "hasItem": false
+        },
+        {
+          "value": "Open",
+          "onclick": "OpenDoc()"
+        },
+        {
+          "value": "Close",
+          "onclick": "CloseDoc()"
+        }
+      ]
+    }
+  }
+}

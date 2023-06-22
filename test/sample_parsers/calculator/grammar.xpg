@@ -1,0 +1,8 @@
+equation : (a(VALUE) op(PAIR_OP) b(VALUE)) / (op(SOLO_OP) a(VALUE))
+PAIR_OP = '+' / '-' / '/' / '*' / '^'
+SOLO_OP = 'sin' / 'cos'
+VALUE = FLOAT / INT
+INT = r'[0-9]+'
+FLOAT = r'[0-9]+\.[0-9]+'
+
+SCRIPT = './parser_ext'

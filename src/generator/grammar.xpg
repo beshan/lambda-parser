@@ -1,0 +1,39 @@
+grammar : ((name(NAME) assignment(ASSIGNMENT) expression) / ~comment(COMMENT))+
+expression : first(sub_expr) rest(sequence / choice)?
+choice = (combinator(SLASH) sub_expr)+
+sequence = (combinator(NOT_SLASH) sub_expr !ASSIGNMENT)+
+sub_expr = noncapture(TILDE)? assertion(ASSERTION)? (group / symbol(SYMBOL)) quantifier(QUANTIFIER)
+group : name(NAME &L_PAREN)? L_PAREN expression R_PAREN
+
+# mixed patterns
+ASSERTION = AMPERSAND / EXCLAMATION
+QUANTIFIER = (QUESTION / ASTERISK / PLUS)?
+COMMENT = HASHTAG EXCEPT_LINE_BREAK
+SYMBOL = REGEXP / DYNAMIC_RULE / LITERAL / NAME
+ASSIGNMENT = COLON / EQUAL 
+REGEXP = LOWER_R LITERAL
+
+# patterns
+NAME = r'[a-zA-Z0-9_]+'
+LITERAL = r'''([^'']|(''''))*'''
+NOT_SLASH = r'[^/]'
+EXCEPT_LINE_BREAK = r'[^\n]*'
+DYNAMIC_RULE = r'SCRIPT(\.[a-zA-Z0-9_]+)+'
+
+# symbols
+LOWER_R = 'r'
+L_PAREN = '('
+R_PAREN = ')'
+COLON = SCRIPT.COLON
+EQUAL = '='
+TILDE = '~'
+SLASH = '/'
+QUESTION = '?'
+ASTERISK = '*'
+PLUS = '+'
+AMPERSAND = SCRIPT.AMPERSAND
+EXCLAMATION = SCRIPT.EXCLAMATION
+HASHTAG = '#'
+
+SKIP = r'\s*'
+SCRIPT = './parser_ext'
